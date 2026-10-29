@@ -1,1228 +1,714 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA CRAFT | El Yapımı Deri Cüzdan & Atölye</title>
-    <!-- Google Fonts & FontAwesome Icons -->
+    <title>Aura Leather Studio | El Yapımı Hakiki Deri Cüzdan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        craft: {
+                            base: '#0f0d0b',
+                            card: '#1a1613',
+                            hover: '#26201b',
+                            border: '#3a3028',
+                            amber: '#d97706',
+                            gold: '#b45309',
+                            cream: '#f5f2eb',
+                            muted: '#a3988e'
+                        }
+                    },
+                    fontFamily: {
+                        title: ['Cinzel', 'serif'],
+                        body: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --bg-main: #0f0e0c;
-            --bg-card: #181613;
-            --bg-card-hover: #221f1a;
-            --accent: #d4a373;
-            --accent-hover: #b88652;
-            --accent-glow: rgba(212, 163, 115, 0.15);
-            --text-main: #f4f1ea;
-            --text-muted: #9e9a93;
-            --border: #2a2620;
-            --font-heading: 'Cinzel', serif;
-            --font-body: 'Plus Jakarta Sans', sans-serif;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            line-height: 1.6;
-            overflow-x: hidden;
+            background-color: #0f0d0b;
+            color: #f5f2eb;
+            font-family: 'Inter', sans-serif;
         }
-
-        /* Typography */
-        h1, h2, h3, h4, .brand-font {
-            font-family: var(--font-heading);
-            letter-spacing: 1px;
+        .font-title {
+            font-family: 'Cinzel', serif;
         }
-
-        a {
-            color: inherit;
-            text-decoration: none;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        button {
-            cursor: pointer;
-            border: none;
-            outline: none;
-            font-family: var(--font-body);
+        ::-webkit-scrollbar-track {
+            background: #0f0d0b;
         }
-
-        /* Container & Layout */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        ::-webkit-scrollbar-thumb {
+            background: #3a3028;
+            border-radius: 4px;
         }
-
-        /* Header & Navigation */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background-color: rgba(15, 14, 12, 0.9);
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d97706;
+        }
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(26, 22, 19, 0.85);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo i {
-            color: var(--accent);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-link {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-            padding: 5px 0;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--accent);
-        }
-
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .cart-icon-btn {
-            background: transparent;
-            color: var(--text-main);
-            font-size: 1.2rem;
-            position: relative;
-            padding: 8px;
-            transition: var(--transition);
-        }
-
-        .cart-icon-btn:hover {
-            color: var(--accent);
-        }
-
-        .cart-badge {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background-color: var(--accent);
-            color: #000;
-            font-size: 0.7rem;
-            font-weight: 700;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* SPA Page Sections Controls */
-        .page-section {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out;
-            padding-bottom: 80px;
-        }
-
-        .page-section.active {
-            display: block;
-            opacity: 1;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 100px 0 60px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .hero-title {
-            font-size: 3.2rem;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .hero-title span {
-            color: var(--accent);
-            display: block;
-        }
-
-        .hero-desc {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-        }
-
-        .btn-primary {
-            background-color: var(--accent);
-            color: #0f0e0c;
-            padding: 14px 32px;
-            border-radius: 4px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: var(--transition);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--border);
-            padding: 14px 32px;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: var(--transition);
-            margin-left: 15px;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .hero-image-wrap {
-            position: relative;
-        }
-
-        .hero-img {
-            width: 100%;
-            height: 480px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        /* Highlights */
-        .highlights {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin: 60px 0;
-        }
-
-        .highlight-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 8px;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .highlight-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .highlight-icon {
-            font-size: 2rem;
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-
-        /* Store Filter */
-        .store-header {
-            text-align: center;
-            margin: 60px 0 40px;
-        }
-
-        .section-subtitle {
-            color: var(--accent);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        .filter-wrapper {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background-color: var(--bg-card);
-            color: var(--text-muted);
-            border: 1px solid var(--border);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background-color: var(--accent);
-            color: #0f0e0c;
-            border-color: var(--accent);
-        }
-
-        /* Product Grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .product-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .product-img-wrap {
-            position: relative;
-            height: 260px;
-            overflow: hidden;
-        }
-
-        .product-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .product-card:hover .product-img {
-            transform: scale(1.05);
-        }
-
-        .product-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background-color: rgba(15, 14, 12, 0.8);
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 4px;
-        }
-
-        .product-info {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .product-title {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-
-        .product-desc {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-
-        .product-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .product-price {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .btn-add-cart {
-            background-color: var(--border);
-            color: var(--text-main);
-            padding: 8px 16px;
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-
-        .btn-add-cart:hover {
-            background-color: var(--accent);
-            color: #0f0e0c;
-        }
-
-        /* Story Page */
-        .story-container {
-            max-width: 800px;
-            margin: 60px auto 0;
-        }
-
-        .story-image-full {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin: 30px 0;
-            border: 1px solid var(--border);
-        }
-
-        .craft-step {
-            display: flex;
-            gap: 25px;
-            margin-bottom: 30px;
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .craft-step-num {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        /* Contact Page */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            margin-top: 50px;
-        }
-
-        .contact-info-box {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 8px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .contact-item i {
-            color: var(--accent);
-            font-size: 1.2rem;
-            margin-top: 4px;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 12px 15px;
-            border-radius: 4px;
-            font-family: var(--font-body);
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: var(--accent);
-            outline: none;
-        }
-
-        /* Product Detail Modal */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(5px);
-            z-index: 200;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            max-width: 900px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            padding: 30px;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            background: none;
-        }
-
-        .modal-close:hover {
-            color: var(--accent);
-        }
-
-        .modal-img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-
-        .option-label {
-            display: block;
-            margin: 15px 0 8px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .color-options {
-            display: flex;
-            gap: 10px;
-        }
-
-        .color-radio {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: var(--transition);
-        }
-
-        .color-radio.selected {
-            border-color: var(--accent);
-            transform: scale(1.1);
-        }
-
-        .custom-text-input {
-            width: 100%;
-            background-color: var(--bg-main);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 10px;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-
-        /* Cart Drawer */
-        .cart-drawer {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 380px;
-            height: 100%;
-            background-color: var(--bg-card);
-            border-left: 1px solid var(--border);
-            z-index: 300;
-            transition: right 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            padding: 25px;
-        }
-
-        .cart-drawer.open {
-            right: 0;
-        }
-
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .cart-items {
-            flex-grow: 1;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .cart-item {
-            display: flex;
-            gap: 15px;
-            background-color: var(--bg-main);
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-            position: relative;
-        }
-
-        .cart-item-img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-
-        .cart-item-remove {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: var(--text-muted);
-            background: none;
-        }
-
-        .cart-item-remove:hover {
-            color: #ff5252;
-        }
-
-        .cart-footer {
-            border-top: 1px solid var(--border);
-            padding-top: 20px;
-            margin-top: 20px;
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .btn-whatsapp-order {
-            width: 100%;
-            background-color: #25d366;
-            color: #fff;
-            padding: 14px;
-            border-radius: 4px;
-            font-weight: 700;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            transition: var(--transition);
-        }
-
-        .btn-whatsapp-order:hover {
-            background-color: #1eb957;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 250;
-            display: none;
-        }
-
-        .overlay.active {
-            display: block;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--bg-card);
-            border-top: 1px solid var(--border);
-            padding: 40px 0;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-btns {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .btn-secondary {
-                margin-left: 0;
-            }
-
-            .highlights {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-content {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cart-drawer {
-                width: 100%;
-                right: -100%;
-            }
-
-            .nav-links {
-                gap: 15px;
-                font-size: 0.85rem;
-            }
+            border: 1px solid rgba(217, 119, 6, 0.15);
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-700 selection:text-white">
 
-    <!-- Header Navigation -->
-    <header>
-        <div class="container nav-wrapper">
-            <a href="#home" class="logo" onclick="navigateTo('home')">
-                <i class="fa-solid fa-gem"></i> AURA CRAFT
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-amber-900/60 border-b border-amber-800/40 text-amber-200 text-xs py-2 px-4 text-center font-medium tracking-wide">
+        ✨ Tüm El Yapımı Siparişlerde İsim/Baş Harf Baskısı (Monogram) <span class="underline font-bold">HEDİYE!</span> | 1500 TL Üzeri Ücretsiz Kargo
+    </div>
+
+    <!-- STICKY NAVBAR -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-craft-border transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full border border-amber-600/50 flex items-center justify-center bg-amber-950/40 group-hover:border-amber-500 transition">
+                    <i class="fa-solid fa-gem text-amber-500 text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-title text-xl font-bold tracking-widest text-amber-50 block uppercase">AURA LEATHER</span>
+                    <span class="text-[10px] tracking-widest text-amber-500/80 block uppercase -mt-1">Handcrafted Leather Studio</span>
+                </div>
             </a>
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-link active" id="nav-home" onclick="navigateTo('home')">Ana Sayfa</a></li>
-                <li><a href="#store" class="nav-link" id="nav-store" onclick="navigateTo('store')">Mağaza</a></li>
-                <li><a href="#story" class="nav-link" id="nav-story" onclick="navigateTo('story')">Hikayemiz</a></li>
-                <li><a href="#contact" class="nav-link" id="nav-contact" onclick="navigateTo('contact')">İletişim</a></li>
-            </ul>
-            <div class="nav-actions">
-                <button class="cart-icon-btn" onclick="toggleCart()">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="cart-badge" id="cartBadge">0</span>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide text-craft-muted">
+                <a href="#koleksiyon" class="hover:text-amber-400 transition">Koleksiyon</a>
+                <a href="#zanaat" class="hover:text-amber-400 transition">Deri & Zanaat</a>
+                <a href="#hakkimizda" class="hover:text-amber-400 transition">Hakkımızda</a>
+                <a href="#iletisim" class="hover:text-amber-400 transition">İletişim</a>
+            </nav>
+
+            <!-- Actions (Cart Button & WhatsApp Direct) -->
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/905378346244?text=Merhaba,%20el%20yap%C4%B1m%C4%B1%20deri%20c%C3%BCzdanlar%C4%B1n%C4%B1z%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" class="hidden sm:flex items-center gap-2 text-xs bg-emerald-950/60 border border-emerald-600/40 hover:bg-emerald-900/60 text-emerald-300 px-3 py-2 rounded-lg transition">
+                    <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i>
+                    <span>Sipariş Hattı</span>
+                </a>
+
+                <!-- Shopping Cart Toggle -->
+                <button id="cartBtn" onclick="toggleCart()" class="relative p-2.5 rounded-lg border border-craft-border bg-craft-card hover:border-amber-600/50 transition">
+                    <i class="fa-solid fa-bag-shopping text-amber-400 text-lg"></i>
+                    <span id="cartBadge" class="hidden absolute -top-2 -right-2 bg-amber-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-craft-base">0</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Overlay -->
-    <div class="overlay" id="overlay" onclick="closeAllModals()"></div>
-
-    <!-- PAGE 1: HOME PAGE -->
-    <section id="page-home" class="page-section active">
-        <div class="container">
-            <div class="hero">
-                <div>
-                    <span class="section-subtitle">Geleneksel El Zanaatı</span>
-                    <h1 class="hero-title">Zamanla Güzelleşen <span>Hakiki Deri Cüzdanlar</span></h1>
-                    <p class="hero-desc">Sürdürülebilir vejetal tabaklanmış deriden, tamamen el dikişiyle atölyemizde üretilmiştir. Seri üretim değil, kişiye özel karakter taşıyan ürünler.</p>
-                    <div class="hero-btns">
-                        <button class="btn-primary" onclick="navigateTo('store')">Koleksiyonu Keşfet <i class="fa-solid fa-arrow-right"></i></button>
-                        <button class="btn-secondary" onclick="navigateTo('story')">Üretim Sürecimiz</button>
+    <!-- HERO SECTION -->
+    <section class="relative py-20 md:py-28 overflow-hidden bg-gradient-to-b from-craft-card/50 to-craft-base">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-950/60 border border-amber-800/40 text-amber-400 text-xs font-semibold tracking-wider uppercase">
+                        <i class="fa-solid fa-fire text-xs"></i> 100% Elde Kesim & Saraciye Dikişi
+                    </div>
+                    <h1 class="font-title text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-amber-50">
+                        Zamanla Güzelleşen <br><span class="text-amber-500 underline decoration-amber-800/60 decoration-wavy decoration-1">Hakiki Deri</span> Dokunuşu
+                    </h1>
+                    <p class="text-craft-muted text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Usta ellerde şekillenen geleneksel saraciye el dikişi, %100 vejetal dana derisi ve yıllar geçtikçe karakter kazanan benzersiz patina.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#koleksiyon" class="w-full sm:w-auto bg-amber-600 hover:bg-amber-500 text-white px-8 py-4 rounded-xl font-medium tracking-wide transition shadow-lg shadow-amber-900/30 flex items-center justify-center gap-2">
+                            <span>Modelleri İncele</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="#zanaat" class="w-full sm:w-auto border border-craft-border hover:border-amber-700/60 bg-craft-card/80 text-craft-cream px-8 py-4 rounded-xl font-medium tracking-wide transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-hammer text-amber-500"></i>
+                            <span>Atölye Hikayemiz</span>
+                        </a>
                     </div>
                 </div>
-                <div class="hero-image-wrap">
-                    <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=800" alt="Deri Cüzdan Atölyesi" class="hero-img">
-                </div>
-            </div>
 
-            <div class="highlights">
-                <div class="highlight-card">
-                    <i class="fa-solid fa-hands-holding-circle highlight-icon"></i>
-                    <h3>%100 El Dikişi</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px;">Saraciye dikişi yöntemiyle kopmaz, deforme olmaz uzun ömürlü yapı.</p>
-                </div>
-                <div class="highlight-card">
-                    <i class="fa-solid fa-leaf highlight-icon"></i>
-                    <h3>Vejetal Deri</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px;">Bitkisel tabaklanmış, kimyasal içermeyen doğa dostu birinci sınıf deri.</p>
-                </div>
-                <div class="highlight-card">
-                    <i class="fa-solid fa-signature highlight-icon"></i>
-                    <h3>Ücretsiz Kişiselleştirme</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px;">İsminizi veya baş harflerinizi sıcak baskı yöntemiyle mühürlüyoruz.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PAGE 2: STORE / CATALOG PAGE -->
-    <section id="page-store" class="page-section">
-        <div class="container">
-            <div class="store-header">
-                <span class="section-subtitle">El Yapımı Koleksiyon</span>
-                <h2>Deri Cüzdan & Aksesuarlar</h2>
-            </div>
-
-            <div class="filter-wrapper">
-                <button class="filter-btn active" onclick="filterProducts('all', this)">Tüm Ürünler</button>
-                <button class="filter-btn" onclick="filterProducts('kartlik', this)">Minimal Kartlık</button>
-                <button class="filter-btn" onclick="filterProducts('katlamali', this)">Katlamalı Cüzdan</button>
-                <button class="filter-btn" onclick="filterProducts('bozuk-parali', this)">Bozuk Paralı</button>
-                <button class="filter-btn" onclick="filterProducts('pasaport', this)">Pasaport / Seyahat</button>
-            </div>
-
-            <div class="product-grid" id="productGrid">
-                <!-- Products dynamically rendered by JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- PAGE 3: STORY PAGE -->
-    <section id="page-story" class="page-section">
-        <div class="container story-container">
-            <div style="text-align: center;">
-                <span class="section-subtitle">Atölye Ruhu</span>
-                <h2>Derinin Zanaat Yolculuğu</h2>
-            </div>
-            
-            <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=1000" alt="Deri İşleme" class="story-image-full">
-
-            <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px; text-align: center;">
-                Aura Craft atölyesinde fabrikasyon makinelere yer yoktur. Her cüzdan, derinin doğal dokusu korunarak geleneksel aletler ve usta eller vasıtasıyla şekillenir.
-            </p>
-
-            <div class="craft-step">
-                <div class="craft-step-num">01</div>
-                <div>
-                    <h3>Derinin Seçimi</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Doğal bitkisel özlerle tabaklanmış 1.2 mm kalınlığındaki dana derilerini özenle seçiyoruz. Bu deri zamanla kullandıkça koyulaşır ve kendine özgü patina kazanır.</p>
-                </div>
-            </div>
-
-            <div class="craft-step">
-                <div class="craft-step-num">02</div>
-                <div>
-                    <h3>Hassas Kesim ve Oluk Açma</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Şablonlar doğrultusunda el neşteri ile milimetrik kesimler yapılır. Dikiş kanalları el aletleriyle açılarak ipin deriye gömülmesi sağlanır.</p>
-                </div>
-            </div>
-
-            <div class="craft-step">
-                <div class="craft-step-num">03</div>
-                <div>
-                    <h3>Geleneksel Çift İğne Saraciye Dikişi</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Makine dikişinin aksine tek bir dikiş kopsa dahi sökülmeyen mumlu dikiş ipi ve iki iğne tekniği kullanılarak tamamen elle dikilir.</p>
-                </div>
-            </div>
-
-            <div class="craft-step">
-                <div class="craft-step-num">04</div>
-                <div>
-                    <h3>Kenar Perdahlama & Cam Cilası</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">Cüzdan kenarları doğal balmumu ve ahşap perdah aleti ile sürtünme ısıtılarak pürüzsüzleştirilir ve mühürlenir.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PAGE 4: CONTACT PAGE -->
-    <section id="page-contact" class="page-section">
-        <div class="container">
-            <div style="text-align: center; margin-top: 40px;">
-                <span class="section-subtitle">Bize Ulaşın</span>
-                <h2>Atölye & İletişim</h2>
-            </div>
-
-            <div class="contact-grid">
-                <div class="contact-info-box">
-                    <h3>Atölyemizle İletişime Geçin</h3>
-                    <p style="color: var(--text-muted); margin: 15px 0 30px;">Özel sipariş talepleri, toptan alım veya merak ettiğiniz her şey için doğrudan ustamızla görüşebilirsiniz.</p>
-
-                    <div class="contact-item">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <div>
-                            <strong>Atölye Adresi</strong>
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">Merto'nun evi No: 42, İzmir, Türkiye</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <i class="fa-brands fa-whatsapp"></i>
-                        <div>
-                            <strong>Direct WhatsApp</strong>
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">+90 555 000 00 00</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <i class="fa-solid fa-envelope"></i>
-                        <div>
-                            <strong>E-Posta</strong>
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">info@auracraftleather.com</p>
+                <!-- Hero Image Showcase -->
+                <div class="relative flex justify-center">
+                    <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-amber-600/20 to-amber-900/20 blur-xl opacity-75"></div>
+                    <div class="relative rounded-2xl overflow-hidden border border-craft-border bg-craft-card p-3 max-w-md w-full shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=800" alt="El Yapımı Deri Cüzdan" class="w-full h-80 sm:h-96 object-cover rounded-xl hover:scale-105 transition duration-700">
+                        <div class="p-4 flex items-center justify-between text-xs text-craft-muted">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-amber-500"></i> Ömür Boyu Dikiş Garantisi</span>
+                            <span class="text-amber-400 font-semibold">%100 Dana Derisi</span>
                         </div>
                     </div>
                 </div>
-
-                <form class="contact-form" onsubmit="event.preventDefault(); alert('Mesajınız başarıyla gönderildi! En kısa sürede sizinle iletişime geçeceğiz.');">
-                    <div class="form-group">
-                        <input type="text" placeholder="Adınız Soyadınız" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="E-Posta Adresiniz" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea rows="5" placeholder="Mesajınız veya Özel Sipariş Notunuz..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary">Mesaj Gönder</button>
-                </form>
             </div>
         </div>
     </section>
 
-    <!-- PRODUCT DETAIL MODAL -->
-    <div class="modal" id="productModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+    <!-- CRAFT FEATURES HIGHLIGHT -->
+    <section class="py-12 border-y border-craft-border/60 bg-craft-card/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4 space-y-2">
+                    <i class="fa-solid fa-hand text-2xl text-amber-500"></i>
+                    <h4 class="font-semibold text-sm text-craft-cream">Geleneksel El Dikişi</h4>
+                    <p class="text-xs text-craft-muted">Mumlu ip ile çift iğne saraciye dikişi. Sökülmez ve kopmaz.</p>
+                </div>
+                <div class="p-4 space-y-2">
+                    <i class="fa-solid fa-leaf text-2xl text-amber-500"></i>
+                    <h4 class="font-semibold text-sm text-craft-cream">Vejetal Tabaklama</h4>
+                    <p class="text-xs text-craft-muted">Kimyasal içermeyen bitkisel özlerle işlenmiş kaliteli deri.</p>
+                </div>
+                <div class="p-4 space-y-2">
+                    <i class="fa-solid fa-signature text-2xl text-amber-500"></i>
+                    <h4 class="font-semibold text-sm text-craft-cream">Kişiye Özel Monogram</h4>
+                    <p class="text-xs text-craft-muted">Sıcak baskı ile isim veya baş harf özelleştirmesi.</p>
+                </div>
+                <div class="p-4 space-y-2">
+                    <i class="fa-solid fa-truck-fast text-2xl text-amber-500"></i>
+                    <h4 class="font-semibold text-sm text-craft-cream">Özenli Hediye Paketleme</h4>
+                    <p class="text-xs text-craft-muted">Özel kraft kutusu ve mühürlü ambalajında gönderim.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATALOG / SHOWCASE SECTION -->
+    <section id="koleksiyon" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
             <div>
-                <img id="modalImg" src="" alt="Ürün" class="modal-img">
+                <span class="text-amber-500 font-medium text-xs tracking-widest uppercase block mb-1">EL EMEĞİ KOLEKSİYONUMUZ</span>
+                <h2 class="font-title text-3xl sm:text-4xl font-bold text-craft-cream">Tüm Cüzdan Modelleri</h2>
             </div>
-            <div>
-                <span id="modalBadge" class="product-badge">El Yapımı</span>
-                <h2 id="modalTitle" style="margin-top: 10px;">Ürün Başlığı</h2>
-                <div id="modalPrice" class="product-price" style="margin: 10px 0;">0 TL</div>
-                <p id="modalDesc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Açıklama</p>
 
-                <span class="option-label">Deri Rengi Seçimi:</span>
-                <div class="color-options">
-                    <div class="color-radio selected" style="background-color: #4a2c11;" title="Taba Kahve" onclick="selectColor(this, 'Taba Kahve')"></div>
-                    <div class="color-radio" style="background-color: #1a1918;" title="Gece Siyahı" onclick="selectColor(this, 'Gece Siyahı')"></div>
-                    <div class="color-radio" style="background-color: #8c2d19;" title="Taba / Bordo" onclick="selectColor(this, 'Koyu Bordo')"></div>
+            <!-- Search & Filter Controls -->
+            <div class="flex flex-wrap items-center gap-3">
+                <!-- Search Input -->
+                <div class="relative">
+                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Model ara..." class="bg-craft-card border border-craft-border rounded-xl px-4 py-2 text-xs text-craft-cream focus:outline-none focus:border-amber-500 w-40 sm:w-56 pl-9">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-craft-muted text-xs"></i>
+                </div>
+                
+                <!-- Category Filter Buttons -->
+                <div class="flex items-center gap-1 bg-craft-card border border-craft-border p-1 rounded-xl text-xs overflow-x-auto">
+                    <button onclick="setCategory('all')" class="cat-btn active bg-amber-600 text-white px-3 py-1.5 rounded-lg font-medium transition" data-cat="all">Tümü</button>
+                    <button onclick="setCategory('kartlik')" class="cat-btn text-craft-muted hover:text-white px-3 py-1.5 rounded-lg transition" data-cat="kartlik">Kartlık</button>
+                    <button onclick="setCategory('katlamali')" class="cat-btn text-craft-muted hover:text-white px-3 py-1.5 rounded-lg transition" data-cat="katlamali">Katlamalı</button>
+                    <button onclick="setCategory('bozuk')" class="cat-btn text-craft-muted hover:text-white px-3 py-1.5 rounded-lg transition" data-cat="bozuk">Bozuk Paralı</button>
+                    <button onclick="setCategory('pasaport')" class="cat-btn text-craft-muted hover:text-white px-3 py-1.5 rounded-lg transition" data-cat="pasaport">Pasaportluk</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Dynamic JavaScript Render Target -->
+        </div>
+    </section>
+
+    <!-- CRAFT & STORY SECTION -->
+    <section id="zanaat" class="py-20 bg-craft-card/40 border-t border-craft-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-amber-500 font-medium text-xs tracking-widest uppercase">NEDEN EL YAPIMI DERİ?</span>
+                    <h2 class="font-title text-3xl sm:text-4xl font-bold text-craft-cream leading-tight">
+                        Fabrikasyon Değil, <br>Ruhu Olan Zanaat
+                    </h2>
+                    <p class="text-craft-muted text-sm leading-relaxed">
+                        Sitemizdeki her bir cüzdan, makine kullanılmadan tamamen geleneksel yöntemlerle üretilmektedir. Derinin ham halinden ürünün bitimindeki kenar perdahına kadar her adım sabır ve hassasiyet gerektirir.
+                    </p>
+                    
+                    <div class="space-y-4 pt-2">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-amber-950/60 border border-amber-800/40 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-scissors text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sm text-craft-cream">Elde Kesim & Kenar Perdahı</h4>
+                                <p class="text-xs text-craft-muted mt-0.5">Deriler tek tek elde kesilir. Kenarlar doğal balmumu ve tokanol ile pürüzsüzleştirilip parlatılır.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-amber-950/60 border border-amber-800/40 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-circle-nodes text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sm text-craft-cream">Saraciye (Saddle) Dikişi</h4>
+                                <p class="text-xs text-craft-muted mt-0.5">İki iğne ile çapraz atılan saraciye dikişi sayesinde iplerden biri kopsa bile dikiş çözülmez.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-amber-950/60 border border-amber-800/40 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-clock-rotate-left text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sm text-craft-cream">Patina Süreci</h4>
+                                <p class="text-xs text-craft-muted mt-0.5">Vejetal deri kullandıkça elinizin yağı ve güneş ışığı ile koyulaşır, kendine has vintage bir görünüm kazanır.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <span class="option-label">Ücretsiz Kişiselleştirme (İsim / Baş Harfler):</span>
-                <input type="text" id="customInitials" class="custom-text-input" placeholder="Örn: A.K. (İstemiyorsanız boş bırakın)" maxlength="8">
-
-                <button class="btn-primary" style="width: 100%; margin-top: 25px; justify-content: center;" onclick="addModalProductToCart()">
-                    <i class="fa-solid fa-cart-plus"></i> Sepete Ekle
-                </button>
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=600" alt="Deri İşleme Zanaatı" class="rounded-2xl border border-craft-border object-cover h-64 w-full shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1606503153255-59d8b8b82176?auto=format&fit=crop&q=80&w=600" alt="Deri Cüzdan Detay" class="rounded-2xl border border-craft-border object-cover h-64 w-full shadow-lg mt-8">
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- CART DRAWER -->
-    <div class="cart-drawer" id="cartDrawer">
-        <div class="cart-header">
-            <h3>Alışveriş Sepetim</h3>
-            <button class="modal-close" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="cart-items" id="cartItemsContainer">
-            <!-- Cart items added dynamically -->
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>Toplam:</span>
-                <span id="cartTotalAmount">0 TL</span>
+    <!-- ABOUT SECTION -->
+    <section id="hakkimizda" class="py-16 max-w-5xl mx-auto px-4 text-center">
+        <i class="fa-solid fa-quote-left text-3xl text-amber-600/40 mb-4 block"></i>
+        <h3 class="font-title text-2xl sm:text-3xl font-bold text-craft-cream mb-4">"Her cüzdan sahibinin hikayesini taşır."</h3>
+        <p class="text-craft-muted text-sm sm:text-base leading-relaxed max-w-3xl mx-auto">
+            Aura Leather Studio olarak seri üretimin ruhsuzlaştırdığı nesneler yerine, her dikişinde emek olan, yıllarca güvenle kullanabileceğiniz uzun ömürlü deri ürünler tasarlıyoruz. Sürdürülebilir ve zamansız aksesuarlar ile stilinize doğal bir dokunuş katıyoruz.
+        </p>
+    </section>
+
+    <!-- FOOTER & CONTACT -->
+    <footer id="iletisim" class="bg-craft-card border-t border-craft-border pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-gem text-amber-500"></i>
+                        <span class="font-title text-lg font-bold text-craft-cream">AURA LEATHER</span>
+                    </div>
+                    <p class="text-xs text-craft-muted leading-relaxed">
+                        El yapımı hakiki deri cüzdan, kartlık ve kişiselleştirilmiş aksesuar atölyesi.
+                    </p>
+                </div>
+
+                <!-- Navigation Links -->
+                <div>
+                    <h5 class="font-semibold text-sm text-craft-cream mb-3">Hızlı Bağlantılar</h5>
+                    <ul class="space-y-2 text-xs text-craft-muted">
+                        <li><a href="#koleksiyon" class="hover:text-amber-400">Tüm Ürünler</a></li>
+                        <li><a href="#zanaat" class="hover:text-amber-400">Deri Bakım Rehberi</a></li>
+                        <li><a href="#hakkimizda" class="hover:text-amber-400">Atölyemiz</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h5 class="font-semibold text-sm text-craft-cream mb-3">İletişim & Atölye</h5>
+                    <ul class="space-y-2 text-xs text-craft-muted">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-amber-500"></i> Kadıköy / İstanbul</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-amber-500"></i> info@auraleather.com</li>
+                        <li class="flex items-center gap-2"><i class="fa-brands fa-instagram text-amber-500"></i> @auraleatherstudio</li>
+                    </ul>
+                </div>
+
+                <!-- Social & Payment methods -->
+                <div>
+                    <h5 class="font-semibold text-sm text-craft-cream mb-3">Sosyal Medya</h5>
+                    <div class="flex gap-3 text-lg">
+                        <a href="#" class="w-9 h-9 rounded-lg border border-craft-border flex items-center justify-center text-craft-muted hover:text-amber-400 hover:border-amber-500 transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg border border-craft-border flex items-center justify-center text-craft-muted hover:text-amber-400 hover:border-amber-500 transition"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg border border-craft-border flex items-center justify-center text-craft-muted hover:text-amber-400 hover:border-amber-500 transition"><i class="fa-brands fa-pinterest"></i></a>
+                    </div>
+                </div>
             </div>
-            <button class="btn-whatsapp-order" onclick="sendWhatsAppOrder()">
-                <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> WhatsApp ile Sipariş Ver
-            </button>
-        </div>
-    </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 AURA CRAFT - Geleneksel El Yapımı Deri Atölyesi. Tüm Hakları Saklıdır.</p>
+            <div class="border-t border-craft-border/60 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-craft-muted gap-4">
+                <p>© 2026 Aura Leather Studio. Tüm hakları saklıdır.</p>
+                <p class="flex items-center gap-1">
+                    <span>GitHub Pages ile Ücretsiz Barındırılmaktadır</span>
+                </p>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript Engine -->
+    <!-- SHOPPING CART SLIDE-OVER MODAL -->
+    <div id="cartModal" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <!-- Backdrop -->
+        <div onclick="toggleCart()" class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-craft-card border-l border-craft-border flex flex-col justify-between shadow-2xl">
+                <!-- Cart Header -->
+                <div class="p-6 border-b border-craft-border flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-amber-500"></i>
+                        <h3 class="font-title text-lg font-bold text-craft-cream">Alışveriş Sepetiniz</h3>
+                    </div>
+                    <button onclick="toggleCart()" class="text-craft-muted hover:text-white p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items Container -->
+                <div id="cartItems" class="p-6 overflow-y-auto space-y-4 flex-1">
+                    <!-- Dynamic Cart Content -->
+                </div>
+
+                <!-- Cart Summary & Actions -->
+                <div class="p-6 border-t border-craft-border bg-craft-base/80 space-y-4">
+                    <div class="space-y-1 text-sm">
+                        <div class="flex justify-between text-craft-muted">
+                            <span>Ara Toplam</span>
+                            <span id="cartSubtotal" class="font-semibold text-craft-cream">0 TL</span>
+                        </div>
+                        <div class="flex justify-between text-craft-muted text-xs">
+                            <span>Kargo</span>
+                            <span class="text-emerald-400 font-medium">1500 TL Üzeri Ücretsiz</span>
+                        </div>
+                        <div class="flex justify-between text-base font-bold text-craft-cream border-t border-craft-border/60 pt-2 mt-2">
+                            <span>Toplam Tutarı</span>
+                            <span id="cartTotal" class="text-amber-500">0 TL</span>
+                        </div>
+                    </div>
+
+                    <!-- Direct Order Buttons -->
+                    <div class="space-y-2 pt-2">
+                        <button onclick="checkoutWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 rounded-xl transition flex items-center justify-center gap-2 text-sm shadow-lg shadow-emerald-950/40">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>WhatsApp İle Siparişi Tamamla</span>
+                        </button>
+                        <button onclick="checkoutCard()" class="w-full border border-craft-border bg-craft-card hover:bg-craft-hover text-craft-cream font-medium py-3 rounded-xl transition flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-regular fa-credit-card"></i>
+                            <span>Kredi Kartı ile Öde (Sanal POS)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-amber-600 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-lg"></i>
+        <span id="toastMsg" class="text-xs font-medium">Ürün sepete eklendi!</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Data Store
+        // PRODUCT DATABASE
         const products = [
             {
                 id: 1,
-                title: "Aura Minimalist Kartlık",
-                category: "kartlik",
-                price: 650,
-                image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=500",
-                desc: "Ön ve arka kısmında toplam 4 kart bölmesi ve ortasında nakit para cebi bulunan süper ince minimalist model.",
-                badge: "En Çok Satan"
+                name: "Taba Minimalist Bifold Cüzdan",
+                category: "katlamali",
+                price: 850,
+                leather: "Vejetal Tabaklanmış Dana Derisi",
+                thread: "Mumlu Taba İp",
+                image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=600",
+                desc: "6 Adet kart bölmesi ve kağıt para gözü. %100 elde dikilmiştir.",
+                colors: ["Taba", "Koyu Kahve", "Siyah"]
             },
             {
                 id: 2,
-                title: "Klasik Katlamalı Cüzdan",
-                category: "katlamali",
-                price: 1100,
-                image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=500",
-                desc: "Geleneksel 6 kart kapasiteli ve kağıt para bölmeli şık ve zamansız katlamalı deri cüzdan.",
-                badge: "Klasik"
+                name: "Vintage Slim Kartlık",
+                category: "kartlik",
+                price: 490,
+                leather: "Crazy Horse Deri",
+                thread: "Krem Mumlu İp",
+                image: "https://images.unsplash.com/photo-1606503153255-59d8b8b82176?auto=format&fit=crop&q=80&w=600",
+                desc: "Ön ve arka toplam 4 kart bölmesi + orta ana cep. Şık ve ultra ince.",
+                colors: ["Taba", "Haki", "Taba-Siyah"]
             },
             {
                 id: 3,
-                title: "Bozuk Para Bölmeli Model",
-                category: "bozuk-parali",
-                price: 1250,
-                image: "https://images.unsplash.com/photo-1606503153255-59d8b8b82176?auto=format&fit=crop&q=80&w=500",
-                desc: "Pirinç çıtçıtlı özel bozuk para gözü ve 4 adet kart slotu ile işlevsel tasarım.",
-                badge: "Özel Tasarım"
+                name: "Bozuk Paralı Executive Cüzdan",
+                category: "bozuk",
+                price: 1100,
+                leather: "Premium Dana Derisi",
+                thread: "Kahverengi Dikiş",
+                image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=600",
+                desc: "Çıtçıtlı bozuk para cebi, 8 kart kapasitesi ve geniş banknot bölmesi.",
+                colors: ["Koyu Kahve", "Siyah"]
             },
             {
                 id: 4,
-                title: "Pasaport & Seyahat Kılıfı",
+                name: "Siyah Klasik Bifold Cüzdan",
+                category: "katlamali",
+                price: 890,
+                leather: "Mat Siyah Dana Derisi",
+                thread: "Siyah Saraciye İp",
+                image: "https://images.unsplash.com/photo-1606503153255-59d8b8b82176?auto=format&fit=crop&q=80&w=600",
+                desc: "Zamansız klasik tasarım. Yumuşak tuşeli mat siyah deri dikişi.",
+                colors: ["Siyah"]
+            },
+            {
+                id: 5,
+                name: "Pasaport & Seyahat Kılıfı",
                 category: "pasaport",
-                price: 1450,
-                image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=500",
-                desc: "Pasaport, uçuş biletleri, nakit ve kartlarınızı bir arada tutan premium seyahat organizeri.",
-                badge: "Yeni"
+                price: 1350,
+                leather: "Vejetal Taba Deri",
+                thread: "Sıcak Amber Dikiş",
+                image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=600",
+                desc: "Pasaport, uçak bileti, aşı kartı ve 4 adet kredi kartı bölmeli seyahat kılıfı.",
+                colors: ["Taba", "Koyu Kahve"]
+            },
+            {
+                id: 6,
+                name: "Lüks Fermuarlı Bozuk Paralı Kartlık",
+                category: "bozuk",
+                price: 750,
+                leather: "Yumuşak Dana Derisi",
+                thread: "Mumlu İthal İp",
+                image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=600",
+                desc: "YKK pirinç fermuarlı madeni para cebi ve 6 dış kart bölmesi.",
+                colors: ["Taba", "Kırmızı", "Siyah"]
             }
         ];
 
+        // STATE MANAGEMENT
         let cart = [];
-        let activeProduct = null;
-        let selectedColor = "Taba Kahve";
+        let activeCategory = 'all';
 
-        // Single Page Application (SPA) Routing
-        function navigateTo(pageId) {
-            document.querySelectorAll('.page-section').forEach(section => {
-                section.classList.remove('active');
+        // RENDER PRODUCTS GRID
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+
+            const filtered = products.filter(p => {
+                const matchesCat = activeCategory === 'all' || p.category === activeCategory;
+                const matchesSearch = p.name.toLowerCase().includes(searchVal) || p.desc.toLowerCase().includes(searchVal);
+                return matchesCat && matchesSearch;
             });
-            
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
 
-            const activeSection = document.getElementById(`page-${pageId}`);
-            if (activeSection) {
-                activeSection.classList.add('active');
-            }
-
-            const activeNav = document.getElementById(`nav-${pageId}`);
-            if (activeNav) {
-                activeNav.classList.add('active');
-            }
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Render Product Cards
-        function renderProducts(items) {
-            const grid = document.getElementById('productGrid');
-            grid.innerHTML = items.map(p => `
-                <div class="product-card">
-                    <div class="product-img-wrap">
-                        <img src="${p.image}" alt="${p.title}" class="product-img">
-                        <span class="product-badge">${p.badge}</span>
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-craft-muted">
+                        <i class="fa-solid fa-magnifying-glass text-3xl mb-2 text-amber-600/40"></i>
+                        <p>Aramanıza uygun ürün bulunamadı.</p>
                     </div>
-                    <div class="product-info">
-                        <h3 class="product-title">${p.title}</h3>
-                        <p class="product-desc">${p.desc}</p>
-                        <div class="product-bottom">
-                            <span class="product-price">${p.price} TL</span>
-                            <button class="btn-add-cart" onclick="openProductModal(${p.id})">İncele & Ekle</button>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="bg-craft-card border border-craft-border rounded-2xl overflow-hidden group hover:border-amber-600/50 transition duration-300 flex flex-col justify-between">
+                    <div>
+                        <!-- Product Image & Badge -->
+                        <div class="relative overflow-hidden h-64 bg-craft-base">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 bg-craft-base/80 backdrop-blur-md border border-amber-500/30 text-amber-400 text-[10px] font-bold uppercase px-2.5 py-1 rounded-md">
+                                %100 El Yapımı
+                            </span>
                         </div>
+
+                        <!-- Product Content -->
+                        <div class="p-5 space-y-3">
+                            <div class="flex items-start justify-between gap-2">
+                                <h3 class="font-title font-bold text-lg text-craft-cream group-hover:text-amber-400 transition">${p.name}</h3>
+                                <span class="text-amber-500 font-bold text-lg whitespace-nowrap">${p.price} TL</span>
+                            </div>
+
+                            <p class="text-xs text-craft-muted leading-relaxed line-clamp-2">${p.desc}</p>
+
+                            <!-- Leather Specs -->
+                            <div class="space-y-1 pt-2 border-t border-craft-border/60 text-[11px] text-craft-muted">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-cow text-amber-600"></i>
+                                    <span>${p.leather}</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-dot text-amber-600"></i>
+                                    <span>${p.thread}</span>
+                                </div>
+                            </div>
+
+                            <!-- Options: Color & Monogram Initials -->
+                            <div class="pt-2 space-y-2">
+                                <label class="text-[10px] uppercase font-bold text-craft-muted tracking-wider block">Renk & Baş Harf Baskısı:</label>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <select id="color-${p.id}" class="bg-craft-base border border-craft-border rounded-lg px-2 py-1.5 text-xs text-craft-cream focus:outline-none focus:border-amber-500">
+                                        ${p.colors.map(c => `<option value="${c}">${c}</option>`).join('')}
+                                    </select>
+                                    <input type="text" id="initials-${p.id}" maxlength="3" placeholder="Örn: A.K" class="bg-craft-base border border-craft-border rounded-lg px-2 py-1.5 text-xs text-craft-cream uppercase focus:outline-none focus:border-amber-500" title="Ücretsiz İsim/Baş Harf Baskısı">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add to Cart Button -->
+                    <div class="p-5 pt-0">
+                        <button onclick="addToCart(${p.id})" class="w-full bg-amber-600/90 hover:bg-amber-600 text-white font-medium py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span>Sepete Ekle</span>
+                        </button>
                     </div>
                 </div>
             `).join('');
         }
 
-        // Filter Products
-        function filterProducts(category, btnElement) {
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
+        // CATEGORY FILTER
+        function setCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if(btn.dataset.cat === cat) {
+                    btn.classList.add('bg-amber-600', 'text-white');
+                    btn.classList.remove('text-craft-muted');
+                } else {
+                    btn.classList.remove('bg-amber-600', 'text-white');
+                    btn.classList.add('text-craft-muted');
+                }
+            });
+            renderProducts();
+        }
 
-            if (category === 'all') {
-                renderProducts(products);
+        function filterProducts() {
+            renderProducts();
+        }
+
+        // CART LOGIC
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const colorSelect = document.getElementById(`color-${productId}`);
+            const initialsInput = document.getElementById(`initials-${productId}`);
+
+            const selectedColor = colorSelect ? colorSelect.value : product.colors[0];
+            const selectedInitials = initialsInput ? initialsInput.value.trim().toUpperCase() : '';
+
+            const cartItemKey = `${productId}-${selectedColor}-${selectedInitials}`;
+            const existingItem = cart.find(item => item.key === cartItemKey);
+
+            if (existingItem) {
+                existingItem.qty += 1;
             } else {
-                const filtered = products.filter(p => p.category === category);
-                renderProducts(filtered);
+                cart.push({
+                    key: cartItemKey,
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    color: selectedColor,
+                    initials: selectedInitials,
+                    qty: 1
+                });
             }
-        }
 
-        // Product Modal Operations
-        function openProductModal(productId) {
-            activeProduct = products.find(p => p.id === productId);
-            if (!activeProduct) return;
-
-            document.getElementById('modalImg').src = activeProduct.image;
-            document.getElementById('modalTitle').innerText = activeProduct.title;
-            document.getElementById('modalBadge').innerText = activeProduct.badge;
-            document.getElementById('modalPrice').innerText = activeProduct.price + ' TL';
-            document.getElementById('modalDesc').innerText = activeProduct.desc;
-            document.getElementById('customInitials').value = '';
-
-            document.getElementById('productModal').style.display = 'flex';
-            document.getElementById('overlay').classList.add('active');
-        }
-
-        function closeProductModal() {
-            document.getElementById('productModal').style.display = 'none';
-            document.getElementById('overlay').classList.remove('active');
-        }
-
-        function selectColor(element, colorName) {
-            document.querySelectorAll('.color-radio').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
-            selectedColor = colorName;
-        }
-
-        function addModalProductToCart() {
-            if (!activeProduct) return;
-
-            const initials = document.getElementById('customInitials').value.trim().toUpperCase();
-            
-            const cartItem = {
-                ...activeProduct,
-                color: selectedColor,
-                initials: initials ? initials : 'Yok',
-                cartId: Date.now()
-            };
-
-            cart.push(cartItem);
             updateCartUI();
-            closeProductModal();
-            toggleCart();
+            showToast(`${product.name} sepete eklendi!`);
         }
 
-        // Cart Drawer Operations
-        function toggleCart() {
-            const drawer = document.getElementById('cartDrawer');
-            const overlay = document.getElementById('overlay');
-            drawer.classList.toggle('open');
-            
-            if (drawer.classList.contains('open')) {
-                overlay.classList.add('active');
-            } else {
-                overlay.classList.remove('active');
+        function updateQty(key, change) {
+            const item = cart.find(i => i.key === key);
+            if (!item) return;
+
+            item.qty += change;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.key !== key);
             }
-        }
-
-        function closeAllModals() {
-            closeProductModal();
-            document.getElementById('cartDrawer').classList.remove('open');
-            document.getElementById('overlay').classList.remove('active');
-        }
-
-        function removeFromCart(cartId) {
-            cart = cart.filter(item => item.cartId !== cartId);
             updateCartUI();
         }
 
         function updateCartUI() {
+            // Cart badge count
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
             const badge = document.getElementById('cartBadge');
-            const container = document.getElementById('cartItemsContainer');
-            const totalEl = document.getElementById('cartTotalAmount');
-
-            badge.innerText = cart.length;
-
-            if (cart.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 40px;">Sepetiniz henüz boş.</p>';
-                totalEl.innerText = '0 TL';
-                return;
+            badge.innerText = totalCount;
+            if(totalCount > 0) {
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
             }
 
-            let total = 0;
-            container.innerHTML = cart.map(item => {
-                total += item.price;
-                return `
-                    <div class="cart-item">
-                        <img src="${item.image}" class="cart-item-img" alt="${item.title}">
-                        <div style="flex-grow: 1;">
-                            <h4 style="font-size: 0.9rem;">${item.title}</h4>
-                            <p style="font-size: 0.75rem; color: var(--text-muted);">Renk: ${item.color} | Baskı: ${item.initials}</p>
-                            <span style="color: var(--accent); font-weight: 700; font-size: 0.9rem;">${item.price} TL</span>
-                        </div>
-                        <button class="cart-item-remove" onclick="removeFromCart(${item.cartId})"><i class="fa-solid fa-trash"></i></button>
+            // Render Cart Modal Items
+            const cartItemsContainer = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="py-12 text-center text-craft-muted space-y-3">
+                        <i class="fa-solid fa-bag-shopping text-4xl text-amber-600/30"></i>
+                        <p class="text-sm">Sepetiniz henüz boş.</p>
                     </div>
                 `;
-            }).join('');
+            } else {
+                cartItemsContainer.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between gap-3 bg-craft-base p-3 rounded-xl border border-craft-border">
+                        <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-lg">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-semibold text-xs text-craft-cream truncate">${item.name}</h4>
+                            <p class="text-[11px] text-amber-500 font-medium">${item.price} TL</p>
+                            <div class="text-[10px] text-craft-muted flex gap-2 mt-0.5">
+                                <span>Renk: ${item.color}</span>
+                                ${item.initials ? `<span class="text-amber-400 font-bold">Baskı: [${item.initials}]</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 bg-craft-card border border-craft-border rounded-lg px-2 py-1">
+                            <button onclick="updateQty('${item.key}', -1)" class="text-craft-muted hover:text-white px-1">-</button>
+                            <span class="text-xs font-semibold text-craft-cream w-4 text-center">${item.qty}</span>
+                            <button onclick="updateQty('${item.key}', 1)" class="text-craft-muted hover:text-white px-1">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
 
-            totalEl.innerText = total + ' TL';
+            // Calculations
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            document.getElementById('cartSubtotal').innerText = `${subtotal} TL`;
+            document.getElementById('cartTotal').innerText = `${subtotal} TL`;
         }
 
-        // Send Order via WhatsApp Direct API
-        function sendWhatsAppOrder() {
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            modal.classList.toggle('hidden');
+        }
+
+        // CHECKOUT DISPATCH
+        function checkoutWhatsApp() {
             if (cart.length === 0) {
-                alert('Sepetiniz boş! Lütfen sipariş vermeden önce ürün ekleyin.');
+                alert("Sepetiniz boş. Lütfen önce ürün ekleyiniz.");
                 return;
             }
 
-            const phone = "905378346244"; // Atölye WhatsApp Numarası
-            let message = "Merhaba Aura Craft, web sitenizden yeni bir sipariş vermek istiyorum:\n\n";
-
+            let message = "Merhaba Aura Leather Studio, web sitenizden aşağıdaki el yapımı ürünleri sipariş etmek istiyorum:\n\n";
             let total = 0;
-            cart.forEach((item, index) => {
-                message += `${index + 1}. *${item.title}*\n`;
-                message += `   - Deri Rengi: ${item.color}\n`;
-                message += `   - İsim Baskısı: ${item.initials}\n`;
-                message += `   - Fiyat: ${item.price} TL\n\n`;
-                total += item.price;
+
+            cart.forEach((item, idx) => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+                message += `${idx + 1}. *${item.name}*\n`;
+                message += `   • Renk: ${item.color}\n`;
+                if(item.initials) message += `   • İsim/Monogram Baskısı: [${item.initials}]\n`;
+                message += `   • Adet: ${item.qty} x ${item.price} TL = ${itemTotal} TL\n\n`;
             });
 
-            message += `*Toplam Tutar:* ${total} TL\n\n`;
-            message += "Ödeme ve kargo bilgilerini alabilir miyim?";
+            message += `*Toplam Tutar: ${total} TL*\n\nAdres ve ödeme detayları için bilgi alabilir miyim?`;
 
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
+            const encoded = encodeURIComponent(message);
+            // Replace with your actual WhatsApp phone number
+            window.open(`https://wa.me/905378346244text=${encoded}`, '_blank');
         }
 
-        // Initialize App
-        window.onload = () => {
-            renderProducts(products);
-            
-            // Hash tabbed navigation setup
-            const hash = window.location.hash.replace('#', '');
-            if (['home', 'store', 'story', 'contact'].includes(hash)) {
-                navigateTo(hash);
+        function checkoutCard() {
+            if (cart.length === 0) {
+                alert("Sepetiniz boş.");
+                return;
             }
-        };
+            alert("Sanal POS Entegrasyonu: PayTR veya Iyzico ödeme linkinize buradan yönlendirebilirsiniz.");
+        }
+
+        // TOAST NOTIFICATION
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        // INIT ON LOAD
+        window.onload = function() {
+            renderProducts();
+        }
     </script>
 </body>
 </html>
